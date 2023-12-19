@@ -82,7 +82,7 @@ const NavHomePage = () => {
                 <div>
                     <LogoDropdow />
                 </div>
-                <div>
+                <div className="mx-6">
                     <Image src={ShopSvg} alt="" width={50} height={50} />
                 </div>
                 <Link href="/">Home</Link>

@@ -8,16 +8,18 @@ const LogoDropdow = () => {
     const toggle = () => {
         setOpen(!open);
     }
-
     return (
         <div className="flex row items-center justify-center"
             onClick={toggle}
         >
-            <Image src={EpicLogo} alt="" className="w-[40px] h-[40px]" />
+            <Image src={EpicLogo} alt="" className="w-[32px] h-[32px] mr-3" />
+
             <div
-                className={`transition-transform transform ${open ? 'rotate-180' : ''} hover:`}
+                className={`mr-4 transition-transform transform ${open ? 'rotate-180' : ''} hover:`}
             >
-                <IoIosArrowDown />
+                <IoIosArrowDown className="text-[#F5F5F5]" />
+            </div>
+            <div className=" border h-[30px] w-[1px] border-[#8281816f]">
             </div>
         </div>
     )
