@@ -24,7 +24,7 @@ export  async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Password incorrect" },
                 { status: 401 });
         }
-
+        
         const tokenData  ={
             userId: user.userId,
             email: user.email,
@@ -33,8 +33,6 @@ export  async function POST(request: NextRequest) {
             game: user.imageUrl,
             createdAt : user.createdAt,
             updatedAt : user.updatedAt,
-            
-            
         }
         const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, {
             expiresIn: "1d"
