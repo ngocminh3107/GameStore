@@ -6,7 +6,7 @@ export default function RootLayout({
   }) {
     return (
       <div>
-        <div>
+        <div className="relative">
             <NavHomePage/>
         </div>
         {children}

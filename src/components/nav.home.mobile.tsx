@@ -15,7 +15,11 @@ import {
     IoMdClose
 } from "react-icons/io";
 import Drawer from "./drawer"
-const NavHomePage = () => {
+
+interface DrawerProps {
+    shows: boolean;
+}
+const NavHomeMobilePage = ({ shows }: DrawerProps) => {
     const pathname = usePathname()
     const dropdownMenuItems = [
         {
@@ -104,66 +108,44 @@ const NavHomePage = () => {
         getData();
     }, []);
 
+    //get height screen
+    const [height, setHeight] = useState(0);
+    useEffect(() => {
+        setHeight(window.innerHeight);
+    }, []);
     return (
-        <div className={`flex row  justify-between  items-center px-[24px] py-[20px] ${!open ? "bg-[#101014] fixed top-0 w-full" : "bg-[#18181C] "}`}>
-            <div className="flex row items-center">
-                <div className={` translate-x duration-300 ${!open ? "hidden" : ""}`}>
-                    <LogoDropdow />
-                </div>
-                <div className={`mx-0 translate duration-300 xl:mx-6 ${!open ? "mx-0" : "mx-6"}`}>
-                    <Image src={ShopSvg} alt="" />
-                </div>
-                <ul className="row items-center hidden xl:flex ">
-                    {
-                        navmenu.map((item, index) => (
-                            <li key={index} className={`text-[#AAAAAE] text-sm px-4 py-1 rounded-[8px] hover:bg-[#404044] hover:text-[white] ${pathname === item.link ? "bg-[#404044] text-[white]" : ""}`}>
-                                <Link href={item.link}>
-                                    {item.label}
-                                </Link>
-                            </li>
 
-                        ))
-                    }
-                </ul>
-            </div>
-            <div onClick={() => { toggleMenu(); toggleDrawer(); }} className="">
-                <IoMdClose className={`xl:hidden text-[30px] ${open ? "hidden" : ""}`} />
-                <IoIosMenu className={`xl:hidden text-[30px] ${!open ? "hidden" : ""}`} />
-            </div>
-            <Drawer show={showDrawer} />
-
-            <div className="hidden row items-center xl:flex ">
-                <div className="flex row dropdown dropdown-bottom items-center justify-center">
+        <div className={`px-[24px]  ${!shows ? "hidden" : ""}`}  >
+            <div className="">
+                <div className="w-full justify-end items-end flex row mt-2 mb-2">
                     <div className="p-2 mr-4 w-[32px] h-[32px]">
                         <TfiWorld className="text-[20px] p-0 text-[#AAAAAE]" />
                     </div>
-                    <div tabIndex={0} role="button" className="p-2 mr-4 items-center justify-center text-center  bg-[#515050] rounded-full">
+                    <div tabIndex={0} role="button" className="p-2 items-center justify-center text-center  bg-[#515050] rounded-full">
                         <FaRegUser className="text-[#AAAAAE]" />
                     </div>
+                </div>
+                <div className="flex-col flex justify-between items-center pb-[24px]" style={{ height: `${height - 120}px` }}>
+                    <ul className="flex-col grid gap-4 w-full">
 
-                    <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mr-2">
                         {
-                            dropdownMenuItems.map((item, index) => (
-                                <li key={index}>
-                                    <p>{item.label}</p>
+                            navmenu.map((item, index) => (
+                                <li key={index} className={`text-[#E6E6EA] text-sm p-4 bg-[#202024] rounded-[8px] hover:bg-[#404044] hover:text-[white] ${pathname === item.link ? "bg-[#404044] text-[white]" : ""}`}>
+                                    <Link href={item.link}>
+                                        {item.label}
+                                    </Link>
                                 </li>
+
                             ))
                         }
-                        <li onClick={logout} className={``}>
-                            <p>Sign Out</p>
-                        </li>
-
                     </ul>
+                    <button className="rounded-[8px]  max-sm:w-full w-[342px]  p-4 text-sm cursor-pointer bg-[#26BBFF] text-[black] font-medium first-letter:uppercase ">
+                        download
+                    </button>
                 </div>
-
-
-
-                <button className="rounded-[8px] text-sm cursor-pointer px-3 py-1.5 bg-[#26BBFF] text-[black] font-medium first-letter:uppercase ">
-                    download
-                </button>
             </div>
         </div>
     )
 }
 
-export default NavHomePage
+export default NavHomeMobilePage
